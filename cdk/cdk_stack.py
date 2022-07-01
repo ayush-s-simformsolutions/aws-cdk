@@ -13,8 +13,7 @@ class CdkStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
-        vpc = ec2.Vpc(self, 'CarSaver', 
+        vpc = ec2.Vpc(self, 'project_name', 
             cidr = os.getenv('cidr') 
         )
-        Tags.of(vpc).add('Name', 'CarSaver')
+        Tags.of(vpc).add('Name', 'project_name')
