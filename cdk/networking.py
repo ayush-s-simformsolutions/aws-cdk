@@ -2,10 +2,11 @@ from constructs import Construct
 from aws_cdk import (
     Stack,
     aws_ec2 as ec2,
+    CfnOutput,
 )
 
 class Networking(Stack):
-
+    
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         vpc = ec2.Vpc(self, 'VPC', 
@@ -28,4 +29,9 @@ class Networking(Stack):
                     subnet_type = ec2.SubnetType.PRIVATE_ISOLATED,
                 ),
             ]
+        )
+        CfnOutput(self, "vpc_id", 
+            value = vpc.vpc_id, 
+            description = 'The id of the VPC',
+            export_name = "vpcid"
         )
