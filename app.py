@@ -2,10 +2,13 @@
 
 import aws_cdk as cdk
 
-from cdk.cdk_stack import CdkStack
+from cdk.networking import Networking
+
 
 
 app = cdk.App()
-CdkStack(app, "cdk")
+Networking(app, "Networking")
+
+
 
 app.synth()
