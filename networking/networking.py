@@ -30,8 +30,8 @@ class Networking(Stack):
                 ),
             ]
         )
-        CfnOutput(self, "vpc_id", 
-            value = vpc.vpc_id, 
+        CfnOutput(self, 'VpcID', 
+            value = vpc.vpc_id,
             description = 'The id of the VPC',
-            export_name = "vpcid"
+            export_name = 'VpcID'
         )
