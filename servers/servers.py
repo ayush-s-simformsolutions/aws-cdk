@@ -2,17 +2,15 @@ from constructs import Construct
 from networking.networking import Networking
 from aws_cdk import (
     Stack,
+    NestedStack,
     aws_ec2 as ec2,
-    Fn,
-    CfnOutput,
 )
 
-class Servers(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+class AutoScalingGroup(NestedStack):
+    def __init__(self, scope: Construct, construct_id: str, vpc: ec2.Vpc, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
- 
         ec2_instance = ec2.Instance(self, 'Instance', 
-            vpc =  Fn.import_value('VpcID'),
+            vpc = vpc,
             vpc_subnets = ec2.SubnetSelection(
                 subnet_type = ec2.SubnetType.PRIVATE_WITH_NAT
             ),

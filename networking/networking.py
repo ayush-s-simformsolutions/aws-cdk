@@ -3,13 +3,14 @@ from aws_cdk import (
     Stack,
     aws_ec2 as ec2,
     CfnOutput,
+    Tags,
+    NestedStack,
 )
 
-class Networking(Stack):
-    
+class Networking(NestedStack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        vpc = ec2.Vpc(self, 'VPC', 
+        self.vpc = ec2.Vpc(self, 'VPC', 
             cidr = '10.0.0.0/16',
             max_azs = 3,
             subnet_configuration = [
@@ -30,8 +31,9 @@ class Networking(Stack):
                 ),
             ]
         )
-        CfnOutput(self, 'VpcID', 
-            value = vpc.vpc_id,
-            description = 'The id of the VPC',
-            export_name = 'VpcID'
-        )
+        # Tags.of(vpc).add("Name", "VPC")
+        # CfnOutput(self, 'VpcID', 
+        #     value = vpc.vpc_id,
+        #     description = 'The id of the VPC',
+        #     export_name = 'VpcID'
+        # )
