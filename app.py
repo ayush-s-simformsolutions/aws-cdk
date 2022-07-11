@@ -15,7 +15,7 @@ env = Environment(
 app = cdk.App()
 main_stack = Stack(
     app, 
-    "CarSaver",
+    "Project_name",
 )
 networking = Networking(
     main_stack, 
