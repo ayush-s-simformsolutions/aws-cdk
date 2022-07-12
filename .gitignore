@@ -9,6 +9,7 @@ __pycache__/
 *$py.class
 
 # Environments
+cdkenv
 .env
 .venv
 env/
