@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-
-
 from aws_cdk import (
     Environment,
     Stack,
@@ -8,7 +6,7 @@ from aws_cdk import (
 import aws_cdk as cdk
 import os
 from networking.networking import Networking
-from servers.servers import AutoScalingGroup
+from servers.servers import Servers
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,13 +18,14 @@ env = Environment(
 app = cdk.App()
 main_stack = Stack(
     app,
-    os.getenv('Project_name'),
+    os.getenv('PROJECT_NAME'),
 )
 networking = Networking(
     main_stack, 
     "Networking",
 )
-AutoScalingGroup(main_stack, "Servers", 
+Servers(main_stack, 
+    "Servers", 
     vpc = networking.vpc
 )
 app.synth()
