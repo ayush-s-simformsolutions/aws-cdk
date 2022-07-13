@@ -24,7 +24,8 @@ networking = Networking(
     main_stack, 
     "Networking",
 )
-Servers(main_stack, 
+servers = Servers(
+    main_stack, 
     "Servers", 
     vpc = networking.vpc
 )
